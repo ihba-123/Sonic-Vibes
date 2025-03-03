@@ -20,5 +20,8 @@ export const requireAdmin = async (req, res, next) => {
       return res.status(403).json({ message: "You are not admin" });
     }
     next();
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
 };
