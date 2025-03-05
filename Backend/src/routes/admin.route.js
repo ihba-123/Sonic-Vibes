@@ -1,8 +1,16 @@
 import { Router } from "express";
 import { protectRoute, requireAdmin } from "../middleware/auth.middleware.js";
-import { createSong } from "../controller/admin.controller.js";
+import { createSong, deleteSong, createAlbum, deleteAlbum, checkAdmin} from "../controller/admin.controller.js";
 const router = Router();
 
-router.get("/", protectRoute, requireAdmin, createSong); //Check first user is authenticate and next user is admin or not
+router.use(protectRoute, requireAdmin)//first this run then others andCheck first user is authenticate and next user is admin or not
+
+//check weather the user is admin or not
+router.get('/check',checkAdmin)
+router.post("/songs", createSong); 
+router.delete("/songs/:id",deleteSong);
+
+router.post("/albums", createAlbum); 
+router.delete("/albums/:id",deleteAlbum);
 
 export default router;

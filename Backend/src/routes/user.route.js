@@ -1,12 +1,10 @@
 import { Router } from "express";
 import { protectRoute } from "../middleware/auth.middleware.js";
+import { getAllUsers } from "../controller/user.controller.js";
 
 const router = Router();
 
- router.get('/like' , protectRoute ,(req , res) => { //This custom middleware checks whether user is authenticate or not
-  req.auth.userId
-  res.send("User route with Get method")
- })
+ router.get('/like' , protectRoute ,getAllUsers)
 
 
 export default router
